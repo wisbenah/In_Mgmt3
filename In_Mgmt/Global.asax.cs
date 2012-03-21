@@ -33,12 +33,14 @@ namespace In_Mgmt
 
         protected void Application_Start()
         {
-            //Database.SetInitializer(new Devtalk.EF.CodeFirst.DontDropDbJustCreateTablesIfModelChanged<In_MgmtContext>());
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<In_MgmtContext>());
+            Database.SetInitializer(new CreateDatabaseIfNotExists<In_MgmtContext>());
+            //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<In_MgmtContext>());
             AreaRegistration.RegisterAllAreas();
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
+
+            //Database.SetInitializer<In_MgmtContext>(new Devtalk.EF.CodeFirst.DontDropDbJustCreateTablesIfModelChanged<In_MgmtContext>());
         }
     }
 }
